@@ -23,10 +23,22 @@ function FileDownloadCalculator() {
     }
 
     const downloadTimeInSeconds = fileSizeInMB / (speedInMbps / 8);
-    const minutes = Math.floor(downloadTimeInSeconds / 60);
+
+    const hours = Math.floor(downloadTimeInSeconds / 3600);
+    const minutes = Math.floor((downloadTimeInSeconds % 3600) / 60);
     const seconds = Math.round(downloadTimeInSeconds % 60);
 
-    setDownloadTime(`${minutes} dakika ${seconds} saniye`);
+    // İndirme süresini saat, dakika ve saniye olarak biçimlendirin
+    let formattedTime = '';
+    if (hours > 0) {
+      formattedTime += `${hours} saat `;
+    }
+    if (minutes > 0) {
+      formattedTime += `${minutes} dakika `;
+    }
+    formattedTime += `${seconds} saniye`;
+
+    setDownloadTime(formattedTime);
   };
 
 
